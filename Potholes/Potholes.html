@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>Finding Me</title>
+<script>
+function getLocation(){
+if (navigator.geolocation) {
+navigator.geolocation.getCurrentPosition(getPosition);
+} }
+function getPosition(position){
+document.getElementById("gps").value = "Latitude: " + position.coords.latitude + "Longitude: " + position.coords.longitude;
+}
+</script>
+</head>
+
+<!--
+===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="../css/garage.css">
+<!--===============================================================================================-->
+
+<body>
+  <div class="limiter">
+    <div class="container-background" style="background-image: url('../images/Background1.jpg');">
+      <button class="submit" onclick="getLocation()"> Locate Me </button> <br><br>
+        <form method="post">
+
+          Input Code:<br>
+          <input id="gps" type="text" name="location"><br>
+  
+          Pothole Size:<br>
+          <input type="radio" name="size" value="small"> Small <br>
+          <input type="radio" name="size" value="medium"> Medium <br>
+          <input type="radio" name="size" value="large"> Large <br>
+
+          Name:<br>
+          <input type="text" name="name"><br>
+          Contact:<br>
+          <input type="text" name="contact"><br>
+
+          Picture:<br>
+          <input type="file" name="picture" accept="image/png, image/jpeg"><br>
+
+        </form>
+      </div>
+    </div>
+
+</body>
+
+
+</html>

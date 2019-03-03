@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Parking Garage</title>
+	<meta charset="UTF-8">
+<!--
+===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../css/garage.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	
+<!--===============================================================================================-->
+</head>
+
+<body>
+	<div class="limiter">
+		<div class="container-background" style="background-image: url('../images/Background1.jpg');">
+			<h1>REAL-TIME PARKING GARAGE AVAILABILITY</h1>
+				<table class="garage-table">
+					<tr>
+						<th style="width: 120px"></th>
+						<th class = "garage-image" style="background-image: url('../images/Garage.jpg');"></th>
+						<th class = "garage-image" style="background-image: url('../images/Main Avenue Garage.jpg');"></th>
+						<th class = "garage-image" style="background-image: url('../images/Market Square Garage.jpg');"></th>
+						<th class = "garage-image" style="background-image: url('../images/State Street Garage.jpg');"></th>
+					</tr>
+					<tr>
+						<th>Garage Name</th>
+						<th>Locust Street Garage</th>
+						<th>Main Avenue Garage</th>
+						<th>Market Square Garage</th>
+						<th>State Street Garage</th>
+					</tr>
+					<tr>
+						<th> Current Vacancy</th>
+						<th id="RT-locust"></th>
+						<th id="RT-main"></th>
+						<th id="RT-square"></th>
+						<th id="RT-state"></th>
+					</tr>
+				</table>
+				<br></br>
+				<br></br>
+			<h1>FUTURE GARAGE OCCUPATION PREDICTION</h1>
+
+					<input class="dateinput" type="date" id="inputdate" name="date1"
+	       					min="2018-08-06" max="2038-12-31"
+	       					value="2019-03-03">
+	 
+	       			<script type="text/javascript"> 
+	       					n =  new Date();
+							y = n.getFullYear();
+							m = n.getMonth() + 1;
+							d = n.getDate();
+							f = y + "-" + m + "-" + d
+							fu = y+1 + "-" + m + "-" + d
+							document.getElementById("inputdate").value = f.toString();
+	       			</script>
+					<select class="selectbar" id="inputtime">
+	  					<option value="0">0:00</option>
+	 					<option value="1">1:00</option>
+	 					<option value="2">2:00</option>
+	  					<option value="3">3:00</option>
+	  					<option value="4">4:00</option>
+	 					<option value="5">5:00</option>
+	 					<option value="6">6:00</option>
+	  					<option value="7">7:00</option>  					
+	  					<option value="8">8:00</option>
+	 					<option value="9">9:00</option>
+	 					<option value="10">10:00</option>
+	  					<option value="11">11:00</option>  					
+	  					<option value="12">12:00</option>
+	 					<option value="13">13:00</option>
+	 					<option value="14">14:00</option>
+	  					<option value="15">15:00</option>
+	  					<option value="16">16:00</option>
+	  					<option value="17">17:00</option>
+	 					<option value="18">18:00</option>
+	 					<option value="19">19:00</option>
+	  					<option value="20">20:00</option>  					
+	  					<option value="21">21:00</option>
+	 					<option value="22">22:00</option>
+	 					<option value="23">23:00</option> 		
+					</select>
+					<button class="submit" onclick="myfunc()">Submit</button>
+					
+				
+
+				<br></br>
+				<table class="garage-table">
+					<tr>
+						<th style="width: 120px">Garage Name</th>
+						<th>Locust Street Garage</th>
+						<th>Main Avenue Garage</th>
+						<th>Market Square Garage</th>
+						<th>State Street Garage</th>
+					</tr>
+					<tr>
+						<th> Current Vacancy</th>
+						<th id="FU-locust"></th>
+						<th id="FU-main"></th>
+						<th id="FU-square"></th>
+						<th id="FU-state"></th>
+					</tr>
+				</table>
+		</div>
+	</div>
+</body>
+		<script type="text/javascript">
+						function myfunc() {
+								
+							var submitdate = document.getElementById("inputdate").value;
+							var selecttime = document.getElementById("inputtime");
+							var submittime = selecttime.options[selecttime.selectedIndex].value;
+							document.getElementById("FU-locust").innerHTML = 3;$.ajax({
+								type: 'post',
+								url: '../php/garage.php',
+								data: {firstd: submitdate, secondt: submittime},
+								dataTpye: 'json',
+								success: function (data) {
+									alert(data);
+									document.getElementById("FU-locust").innerHTML = data;
+									//document.getElementById("FU-main").innerHTML = data[1];
+									//document.getElementById("FU-square").innerHTML = data[2];
+									//document.getElementById("FU-state").innerHTML = data[3];
+
+								},
+								error: function() {
+									alert("Something went wrong, please try again.");
+								}
+							});
+
+						}
+					</script>			
+
+</html>
